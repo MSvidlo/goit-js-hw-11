@@ -1,0 +1,28 @@
+.js-search-form{
+    width: 371px;
+        height: 40px;
+        display: flex;
+        gap:8px;
+}
+.search-btn{
+    border-radius: 8px;
+        padding: 8px 16px;
+        width: 91px;
+        height: 40px;
+        border: none;
+        background: #4e75ff;
+      font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: 0.04em;
+            color: #fff;
+}
+
+.search-btn:hover{
+    background: #6c8cff;
+}
+input{width: 272px;
+    height: 40px;
+border-radius: 4px;
+background: #fff;}
