@@ -34,7 +34,7 @@ searchForm.addEventListener('submit', e => {
                 message: 'There was a problem with the fetch operation. Please try again later.',
                 position: 'topCenter'
             });
-    e.target.reset;
+    e.target.reset();
 })
 
  
@@ -65,8 +65,8 @@ function getPostsByUser(query) {
     <img class="gallery-image" src="${image.previewURL}" alt="#"/></li></ul>`
     
     };
-    function renderImage(images) {
-        const markup = images.map(displayImages).join('');
+    function renderImage(data) {
+        const markup = data.map(displayImages).join('');
 
         getImage.innerHTML = `<ul class='gallery'>${markup}</ul>`;
 }
