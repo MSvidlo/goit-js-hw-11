@@ -1,10 +1,7 @@
 // Описаний у документації
 import iziToast from "izitoast";
 //  Додатковий імпорт стилів
-import "izitoast/dist/css/iziToast.min.css";
- 
-
-
+ import "izitoast/dist/css/iziToast.min.css";
 const searchForm = document.querySelector('.js-search-form');
 const getImage = document.querySelector(".gallery");
 
@@ -25,7 +22,7 @@ searchForm.addEventListener('submit', e => {
     }
                 else {
             // Обробити отримані дані зображень
-            renderImages(data.hits);
+            renderImage(data.hits);
         }
     })
         .catch(error => {
@@ -47,13 +44,13 @@ function getPostsByUser(query) {
     const API_KEY = '42305658-75508782eac06a666c1fb928b';
 
     const params = {
-        key: API_KEY,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: 'true',
-        q: query
+    key: API_KEY,
+    image_type: 'photo',
+    orientation: 'horizontal',
+    safesearch: 'true',
+    q: query
     
-    };
+}
 
 
     const url = `${BASE_URL}${END_POINT}?${new URLSearchParams(params)}`;
@@ -63,8 +60,13 @@ function getPostsByUser(query) {
    return fetch(url).then(res => res.json());
 
     };
-  
-function renderImages(images) {
-    const markup = images.map(image => `<img class="gallery-image" src="${image.previewURL}" alt="#">`).join('');
-    getImage.innerHTML = markup;
+    function displayImages(image) {
+        return `<ul class='gallery'><li class="gallery-item">
+    <img class="gallery-image" src="${image.previewURL}" alt="#"/></li></ul>`
+    
+    };
+    function renderImage(images) {
+        const markup = images.map(displayImages).join('');
+
+        getImage.innerHTML = `<ul class='gallery'>${markup}</ul>`;
 }
