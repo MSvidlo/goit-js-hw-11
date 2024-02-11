@@ -3,6 +3,9 @@
         height: 40px;
         display: flex;
         gap:8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 }
 .search-btn{
     border-radius: 8px;
@@ -39,8 +42,32 @@ flex-wrap: wrap;
 align-items: center;
 justify-content: center;
 gap: 24px;
+width: 1128px;
+height:200px;
 }
-
+.gallery-item{
+ 
+  
+        max-width: 360px;
+        height:200px;
+          }
 .gallery-image{
-    
+
+width:360px;
+height:152px;
+object-fit:cover;
+}
+.gallery-link {
+    height: 152px;
+}
+.image-details{
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 2;
+        letter-spacing: 0.04em;
+        color: #2e2f42;
+    height: 48px;
+    display: flex;
+        
 }

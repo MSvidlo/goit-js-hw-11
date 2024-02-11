@@ -3,7 +3,12 @@ import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
-import { itemTemplate } from './render-functions';
+
+// Описаний у документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 
 const searchForm = document.querySelector('.js-search-form');
 const getImage = document.querySelector(".gallery");
@@ -64,14 +69,25 @@ function getPostsByUser(query) {
    return fetch(url).then(res => res.json());
     };
 
-    function displayImages(image) {
-        return `<ul class='gallery'><li class="gallery-item">
-    <img class="gallery-image" src="${image.previewURL}" alt="#"/></li></ul>`
+   function itemTemplate(images) {
+    getImage.innerHTML = '';
+      images.forEach(image => {
+        const card =
+            `<li class="gallery-item">
+  <a class="gallery-link" href="${image.largeImageURL}">
+    <img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}" />
+  </a>
+   <div class="image-details">
+                    <p>Likes: ${image.likes}</p>
+                    <p>Views: ${image.views}</p>
+                    <p>Comments: ${image.comments}</p>
+                    <p>Downloads: ${image.downloads}</p>
+                </div>
+</li>`;
+        getImage.innerHTML += card;
+    })
+}
     
-    };
-    function renderImage(data) {
-        const markup = data.map(displayImages).join('');
 
-        getImage.innerHTML = `<ul class='gallery'>${markup}</ul>`
-        
-    }
+const lightbox = new SimpleLightbox(".gallery a", { captionsData: "alt", captionDelay: 250, captionPosition: 'bottom' });
+lightbox.refresh();
