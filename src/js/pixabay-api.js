@@ -3,7 +3,7 @@ import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
-
+import from
 const searchForm = document.querySelector('.js-search-form');
 const getImage = document.querySelector(".gallery");
 
@@ -72,4 +72,5 @@ function getPostsByUser(query) {
         const markup = data.map(displayImages).join('');
 
         getImage.innerHTML = `<ul class='gallery'>${markup}</ul>`
+        
     }

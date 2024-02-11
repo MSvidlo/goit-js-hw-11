@@ -25,4 +25,22 @@
 input{width: 272px;
     height: 40px;
 border-radius: 4px;
-background: #fff;}
+background: #fff;};
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.gallery{margin-top: 32px;
+    padding: 0;
+    list-style: none;
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+gap: 24px;
+}
+
+.gallery-image{
+    
+}
