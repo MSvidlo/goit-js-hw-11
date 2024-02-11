@@ -3,7 +3,8 @@ import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
-import from
+import { itemTemplate } from './render-functions';
+
 const searchForm = document.querySelector('.js-search-form');
 const getImage = document.querySelector(".gallery");
 
@@ -24,7 +25,7 @@ searchForm.addEventListener('submit', e => {
             }
             else {
                 // Обробити отримані дані зображень
-                renderImage(data.hits);
+                itemTemplate(data.hits);
             }
         })
         .catch(error => {

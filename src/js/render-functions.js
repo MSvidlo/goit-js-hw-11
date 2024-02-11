@@ -1,4 +1,4 @@
-export
+
 
 // Описаний у документації
 import SimpleLightbox from "simplelightbox";
@@ -11,7 +11,7 @@ const getForm = document.querySelector(".js-search-form");
 
 
 // створення функції що створює розмітку для картки 
-function itemTemplate(images) {
+export function itemTemplate(images) {
     getImage.innerHTML = '';
       images.forEach(image => {
         const card =
