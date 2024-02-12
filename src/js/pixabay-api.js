@@ -18,7 +18,17 @@ const loader = document.querySelector('.loader');
 
 searchForm.addEventListener('submit', e => {
     e.preventDefault();
-    const query = e.target.elements.search.value;
+    const query = e.target.elements.search.value.trim();
+
+//check the input line is not empty
+     if (!query) {
+
+        return iziToast.warning({
+            title: 'Warning',
+            message: 'Please enter a search query',
+            position: 'topCenter'
+        });
+    }
 
  // Show the loading element before starting the HTTP request
     loader.style.display = 'block';
