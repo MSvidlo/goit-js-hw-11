@@ -1,14 +1,4 @@
 
-
-// import { itemTemplate } from './render-functions';
-// // Описаний у документації
-// import SimpleLightbox from "simplelightbox";
-// // Додатковий імпорт стилів
-// import "simplelightbox/dist/simple-lightbox.min.css";
-
-
-
-// // створення функції що створює розмітку для картки 
 export default function itemTemplate(images,getImage) {
     getImage.innerHTML = '';
       images.forEach(image => {
@@ -34,10 +24,10 @@ export default function itemTemplate(images,getImage) {
 
  export function displayImages(image) {
          return `<ul class='gallery'><li class="gallery-item">
-     <img class="gallery-image" src="${image.previewURL}" alt="#"/></li></ul>
+     <img class="gallery-image" src="${image.previewURL}" alt="#"/></li></ul>`
      };
      function renderImage(data) {
          const markup = data.map(displayImages).join('');
 
-         getImage.innerHTML = `<ul class='gallery'>${markup}</ul>`   
+         getImage.innerHTML = `<ul class='gallery'>${markup}</ul>`
  };

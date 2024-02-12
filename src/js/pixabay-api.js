@@ -20,17 +20,17 @@ searchForm.addEventListener('submit', e => {
     e.preventDefault();
     const query = e.target.elements.search.value;
 
-// Show the loading element before starting the HTTP request
+ // Show the loading element before starting the HTTP request
     loader.style.display = 'block';
     getPostsByUser(query)
         .then(data => {
 
-// Hide the download item after the request is complete
+ // Hide the download item after the request is complete
             loader.style.display = 'none';
 
 // Checking for an empty array from the backend
             if (data.hits.length === 0) {
-// Show message about missing images
+ // Show message about missing images
                 iziToast.error({
                     title: 'Error',
                     message: 'Sorry, there are no images matching your search query. Please try again!',
@@ -63,7 +63,7 @@ searchForm.addEventListener('submit', e => {
         });
 });
 
-// HTTP request
+ // HTTP request
 function getPostsByUser(query) {
     const BASE_URL = "https://pixabay.com";
     const END_POINT = '/api/';
@@ -78,6 +78,7 @@ function getPostsByUser(query) {
     
     };
 
+
 const url = `${BASE_URL}${END_POINT}?${new URLSearchParams(params)}`;
- return fetch(url).then(res => res.json());
+  return fetch(url).then(res => res.json());
     };
