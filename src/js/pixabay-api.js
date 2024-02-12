@@ -1,27 +1,36 @@
-// Описаний у документації
+// iziToast import
 import iziToast from "izitoast";
-// Додатковий імпорт стилів
+// additional iziToast import
 import "izitoast/dist/css/iziToast.min.css";
-
-
-// Описаний у документації
+//  SimpleLightbox import
 import SimpleLightbox from "simplelightbox";
-// Додатковий імпорт стилів
+// additional SimpleLightbox import
 import "simplelightbox/dist/simple-lightbox.min.css";
+// import render function task1
+import {displayImages} from './render-functions'
+//  import render function task2
+import itemTemplate from './render-functions';
 
 
 const searchForm = document.querySelector('.js-search-form');
 const getImage = document.querySelector(".gallery");
-
-
+const loader = document.querySelector('.loader');
 
 searchForm.addEventListener('submit', e => {
     e.preventDefault();
     const query = e.target.elements.search.value;
+
+// Show the loading element before starting the HTTP request
+    loader.style.display = 'block';
     getPostsByUser(query)
         .then(data => {
+
+// Hide the download item after the request is complete
+            loader.style.display = 'none';
+
+// Checking for an empty array from the backend
             if (data.hits.length === 0) {
-                // Показати повідомлення про відсутність зображень
+// Show message about missing images
                 iziToast.error({
                     title: 'Error',
                     message: 'Sorry, there are no images matching your search query. Please try again!',
@@ -29,14 +38,22 @@ searchForm.addEventListener('submit', e => {
                 });
             }
             else {
-                // Обробити отримані дані зображень
-                itemTemplate(data.hits);
+// Process the received image data
+                itemTemplate(data.hits, getImage);
+                const lightbox = new SimpleLightbox(".gallery a", {
+                    captionsData: "alt",
+                    captionDelay: 250,
+                    captionPosition: 'bottom'
+                });
+                lightbox.refresh();
+            
             }
         })
         .catch(error => {
-            // Обробити помилку запиту
-            console.error('There was a problem with the fetch operation:', error);
-            // Показати повідомлення про помилку
+// Hide the download item on error
+            loader.style.display = 'none';
+
+// Show error message
             iziToast.error({
                 title: 'Error',
                 message: 'There was a problem with the fetch operation. Please try again later.',
@@ -46,7 +63,7 @@ searchForm.addEventListener('submit', e => {
         });
 });
 
- 
+// HTTP request
 function getPostsByUser(query) {
     const BASE_URL = "https://pixabay.com";
     const END_POINT = '/api/';
@@ -61,33 +78,6 @@ function getPostsByUser(query) {
     
     };
 
-
-    const url = `${BASE_URL}${END_POINT}?${new URLSearchParams(params)}`;
-
-    
-
-   return fetch(url).then(res => res.json());
+const url = `${BASE_URL}${END_POINT}?${new URLSearchParams(params)}`;
+ return fetch(url).then(res => res.json());
     };
-
-   function itemTemplate(images) {
-    getImage.innerHTML = '';
-      images.forEach(image => {
-        const card =
-            `<li class="gallery-item">
-  <a class="gallery-link" href="${image.largeImageURL}">
-    <img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}" />
-  </a>
-   <div class="image-details">
-                    <p>Likes: ${image.likes}</p>
-                    <p>Views: ${image.views}</p>
-                    <p>Comments: ${image.comments}</p>
-                    <p>Downloads: ${image.downloads}</p>
-                </div>
-</li>`;
-        getImage.innerHTML += card;
-    })
-}
-    
-
-const lightbox = new SimpleLightbox(".gallery a", { captionsData: "alt", captionDelay: 250, captionPosition: 'bottom' });
-lightbox.refresh();
